@@ -10,7 +10,7 @@ var parsed = require('raptor-args')
         },
         '--export -e': {
             type: 'string',
-            description: 'Export format, could be json or tree (default)',
+            description: 'Export format, could be csv or json or tree (default)',
             defaultValue: 'tree'
         }
 
@@ -36,7 +36,9 @@ checker.init({}, function(json, err){
     if (!!err) {
         console.log(err);
     } else {
-        if (parsed.export==='json'){
+        if (parsed.export==='csv'){
+            checker.printCsv(json);
+        }else if (parsed.export==='json'){
             checker.printJson(json);
         } else{
             checker.printTree(json);
